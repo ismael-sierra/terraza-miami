@@ -1,0 +1,51 @@
+---
+
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Terraza Miami - Inicio">
+      <img src="/public/images/logo.jpg" alt="Terraza Miami" />
+    </a>
+
+    <button
+      class="menu-button"
+      type="button"
+      aria-expanded="false"
+      aria-controls="main-navigation"
+    >
+      <span class="sr-only">Abrir menú</span>
+
+      <span aria-hidden="true"> ☰ </span>
+    </button>
+
+    <nav
+      id="main-navigation"
+      class="main-navigation"
+      aria-label="Navegación principal"
+    >
+      <a href="/">Inicio</a>
+      <a href="/carta">Carta</a>
+      <a href="/nosotros">Nosotros</a>
+      <a href="/reseñas">Reseñas</a>
+      <a href="/noticias">Noticias</a>
+      <a href="/contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuButton = document.querySelector<HTMLButtonElement>(".menu-button");
+
+  const navigation = document.querySelector<HTMLElement>("#main-navigation");
+
+  if (menuButton && navigation) {
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+
+      navigation.classList.toggle("is-open", !isOpen);
+    });
+  }
+</script>
