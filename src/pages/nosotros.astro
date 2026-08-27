@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<BaseLayout
+  title="Sobre nosotros | Terraza Miami"
+  description="Conoce Terraza Miami, un espacio para disfrutar de buena música, terraza y buenos momentos en Puebla del Prior."
+>
+  <Header />
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Terraza Miami</p>
+
+        <h1>Un lugar para disfrutar</h1>
+
+        <p class="intro">
+          Terraza Miami es un espacio para disfrutar de tapas, raciones,
+          comidas, cenas, cafés y copas en Puebla del Prior.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

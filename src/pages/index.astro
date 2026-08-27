@@ -1,8 +1,59 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: "Terraza Miami",
+    image: "/images/logo.png",
+    telephone: "+34675326150",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Cam. Puebla del Prior",
+      postalCode: "06229",
+      addressLocality: "Puebla del Prior",
+      addressRegion: "Badajoz",
+      addressCountry: "ES",
+    },
+    servesCuisine: ["Tapas", "Comida española"],
+    url: Astro.site,
+    sameAs: ["https://www.facebook.com/profile.php?id=61591632389910"],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "12:00",
+        closes: "16:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "20:00",
+        closes: "23:59",
+      },
+    ],
+  })}
+/>
 
 <BaseLayout
   title="Terraza Miami | Bar en Puebla del Prior"
@@ -203,15 +254,5 @@ import "../styles/global.css";
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Terraza Miami</p>
-
-      <nav aria-label="Enlaces legales">
-        <a href="/aviso-legal">Aviso legal</a>
-        <a href="/privacidad">Política de privacidad</a>
-        <a href="/cookies">Política de cookies</a>
-      </nav>
-    </div>
-  </footer>
+  <Footer />
 </BaseLayout>

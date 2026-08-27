@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<BaseLayout
+  title="Carta | Terraza Miami"
+  description="Descubre la carta de Terraza Miami en Puebla del Prior."
+>
+  <Header />
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Terraza Miami</p>
+
+        <h1>Nuestra carta</h1>
+
+        <p class="intro">Próximamente podrás consultar nuestra carta.</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

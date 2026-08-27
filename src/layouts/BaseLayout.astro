@@ -1,20 +1,54 @@
 ---
 interface Props {
   title: string;
-  description?: string;
+  description: string;
+  ogImage?: string;
 }
 
-const { title, description = "Terraza Miami" } = Astro.props;
+const { title, description, ogImage = "/images/logo.png" } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
+    <!-- Codificación -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO principal -->
+    <title>{title}</title>
+
     <meta name="description" content={description} />
 
-    <title>{title}</title>
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+
+    <meta property="og:type" content="website" />
+
+    <meta property="og:title" content={title} />
+
+    <meta property="og:description" content={description} />
+
+    <meta property="og:image" content={new URL(ogImage, Astro.url)} />
+
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Identidad del sitio -->
+
+    <meta name="theme-color" content="#080808" />
+
+    <!-- Sitemap -->
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="/images/logo.png" />
   </head>
 
   <body>

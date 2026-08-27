@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<BaseLayout
+  title="Reseñas | Terraza Miami"
+  description="Opiniones y reseñas sobre Terraza Miami en Puebla del Prior."
+>
+  <Header />
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Opiniones</p>
+
+        <h1>Lo que dicen nuestros clientes</h1>
+
+        <p class="intro">
+          Próximamente mostraremos aquí las opiniones de nuestros clientes.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

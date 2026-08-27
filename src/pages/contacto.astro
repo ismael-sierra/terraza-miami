@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<BaseLayout
+  title="Contacto | Terraza Miami"
+  description="Contacta con Terraza Miami en Puebla del Prior. Consulta nuestra ubicación, teléfono y horario."
+>
+  <Header />
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Contacto</p>
+
+        <h1>Ven a visitarnos</h1>
+
+        <p class="intro">Estamos en Puebla del Prior, en el Parque de la Hispanidad.</p>
+
+        <p>
+          <strong>Teléfono:</strong>
+          <a href="tel:+34675326150"> 675 326 150 </a>
+        </p>
+
+        <p>
+          <strong>Dirección:</strong><br />
+          Cam. Puebla del Prior<br />
+          06229 Puebla del Prior, Badajoz
+        </p>
+
+        <p>
+          <strong>Horario:</strong><br />
+          Miércoles a lunes: 12:00–16:00 y 20:00–cierre<br />
+          Martes: cerrado
+        </p>
+
+        <p>
+          <a
+            class="button"
+            href="https://wa.me/34675326150"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Escribir por WhatsApp
+          </a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
