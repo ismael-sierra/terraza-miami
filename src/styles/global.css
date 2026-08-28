@@ -161,7 +161,7 @@ a {
 /* HERO */
 
 .hero {
-  min-height: 78vh;
+  min-height: 68vh;
 
   display: grid;
   place-items: center;
@@ -206,7 +206,7 @@ a {
 }
 
 .hero-logo {
-  width: min(300px, 72vw);
+  width: min(260px, 65vw);
 
   margin: 0 auto 2.5rem;
 
@@ -358,9 +358,9 @@ a {
 .features {
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .feature {
@@ -530,6 +530,205 @@ address {
   margin: 0;
 }
 
+/* CARTA */
+
+.menu-page {
+  padding-top: 6rem;
+}
+
+.menu-list {
+  max-width: 800px;
+
+  margin: 0 auto;
+}
+
+.menu-item {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  padding: 1.5rem 0;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu-item h2 {
+  margin: 0;
+
+  font-size: 1.2rem;
+
+  color: var(--color-text);
+}
+
+.menu-item p {
+  margin: 0.35rem 0 0;
+
+  color: var(--color-text-muted);
+}
+
+.menu-price {
+  flex-shrink: 0;
+
+  margin: 0 !important;
+
+  color: var(--color-primary) !important;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+}
+
+.menu-note {
+  max-width: 800px;
+
+  margin: 2rem auto 0;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.85rem;
+}
+
+/* HOME */
+
+/* BLOQUE DE DESTACADO */
+
+.highlight-box {
+  min-height: 320px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 3rem;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius);
+
+  background: radial-gradient(
+    circle at center,
+    rgba(216, 139, 109, 0.12),
+    transparent 65%
+  );
+
+  text-align: center;
+}
+
+.highlight-text {
+  max-width: 300px;
+
+  margin: 0;
+
+  color: var(--color-primary);
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 700;
+
+  line-height: 1.1;
+}
+
+/* PREVISUALIZACIÓN DE CARTA */
+
+.menu-preview {
+  max-width: 800px;
+
+  margin: 0 auto;
+}
+
+.menu-preview-item {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  padding: 1.25rem 0;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu-preview-item h3 {
+  margin: 0;
+
+  color: var(--color-text);
+}
+
+.menu-preview-item p {
+  margin: 0.25rem 0 0;
+
+  color: var(--color-text-muted);
+}
+
+.menu-preview-item strong {
+  flex-shrink: 0;
+
+  color: var(--color-primary);
+
+  font-size: 1.1rem;
+}
+
+.section-action {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 2.5rem;
+}
+
+/* HORARIO */
+
+.opening-hours {
+  border-top: 1px solid var(--color-border);
+}
+
+.opening-hours p {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin: 0;
+
+  padding: 0.8rem 0;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.opening-hours strong {
+  color: var(--color-text);
+}
+
+.opening-hours span {
+  color: var(--color-text-muted);
+
+  text-align: right;
+}
+
+/* CTA FINAL */
+
+.final-cta {
+  text-align: center;
+}
+
+.final-cta .container {
+  max-width: 700px;
+}
+
+.final-cta h2 {
+  margin-bottom: 1rem;
+}
+
+.final-cta p:not(.eyebrow) {
+  color: var(--color-text-muted);
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 800px) {
@@ -600,6 +799,16 @@ address {
 
     align-items: flex-start;
   }
+
+  .opening-hours p {
+    flex-direction: column;
+
+    gap: 0.15rem;
+  }
+
+  .opening-hours span {
+    text-align: left;
+  }
 }
 
 @media (max-width: 500px) {
@@ -617,15 +826,21 @@ address {
     padding: 4rem 0;
   }
 
-  .site-header nav {
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    width: 100%;
-  }
-
   .footer-content {
     grid-template-columns: 1fr;
+  }
+
+  .menu-item {
+    gap: 1rem;
+
+    padding: 1.25rem 0;
+  }
+
+  .menu-item h2 {
+    font-size: 1.05rem;
+  }
+
+  .menu-price {
+    font-size: 1.05rem;
   }
 }

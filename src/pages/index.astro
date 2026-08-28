@@ -11,7 +11,6 @@ import "../styles/global.css";
     "@context": "https://schema.org",
     "@type": "Restaurant",
     name: "Terraza Miami",
-    image: "/images/logo.png",
     telephone: "+34675326150",
     address: {
       "@type": "PostalAddress",
@@ -22,7 +21,6 @@ import "../styles/global.css";
       addressCountry: "ES",
     },
     servesCuisine: ["Tapas", "Comida española"],
-    url: Astro.site,
     sameAs: ["https://www.facebook.com/profile.php?id=61591632389910"],
     openingHoursSpecification: [
       {
@@ -38,26 +36,13 @@ import "../styles/global.css";
         opens: "12:00",
         closes: "16:00",
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "20:00",
-        closes: "23:59",
-      },
     ],
   })}
 />
 
 <BaseLayout
   title="Terraza Miami | Bar en Puebla del Prior"
-  description="Terraza Miami, bar en Puebla del Prior (Badajoz). Tapas, raciones, comidas, cenas, cafés y copas en un ambiente agradable junto al parque."
+  description="Terraza Miami en Puebla del Prior, Badajoz. Tapas, raciones, comidas, cenas, cafés y copas para disfrutar en nuestra terraza."
 >
   <Header />
 
@@ -66,189 +51,255 @@ import "../styles/global.css";
 
     <section class="hero">
       <div class="container">
-        <img
-          class="hero-logo"
-          src="/public/images/logo.jpg"
-          alt="Terraza Miami"
-        />
+        <img class="hero-logo" src="/images/logo.jpg" alt="Terraza Miami" />
 
         <p class="eyebrow">Puebla del Prior · Badajoz</p>
 
-        <h1>Terraza Miami, tu terraza en Puebla del Prior</h1>
+        <h1>Un lugar para disfrutar</h1>
 
         <p class="hero-text">
-          Tapas, raciones, comidas, cenas, cafés y copas para disfrutar de
-          buenos momentos junto al parque.
+          Tapas, raciones, comidas, cenas, cafés y copas para compartir buenos
+          momentos en nuestra terraza.
         </p>
 
         <div class="hero-actions">
-          <a href="tel:+34675326150" class="button"> Llamar </a>
-
           <a
+            class="button"
             href="https://wa.me/34675326150"
-            class="button button-secondary"
             target="_blank"
             rel="noopener noreferrer"
           >
             WhatsApp
           </a>
+
+          <a class="button button-secondary" href="tel:+34675326150">
+            Llamar
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- PRESENTACIÓN -->
+    <!-- QUÉ OFRECEMOS -->
 
     <section class="section">
       <div class="container">
         <div class="section-heading">
-          <p class="eyebrow">Bienvenidos</p>
-
-          <h2>Un lugar para disfrutar en Puebla del Prior</h2>
-        </div>
-
-        <div class="intro">
-          <p>
-            En Terraza Miami queremos que te sientas como en casa. Un espacio
-            para disfrutar de una comida, tomar algo, compartir unas tapas o
-            simplemente pasar un buen rato.
-          </p>
-
-          <p>
-            Estamos junto al parque, en un entorno agradable donde disfrutar de
-            nuestra terraza, buena música y, sobre todo, buena compañía.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- OFERTA -->
-
-    <section class="section section-dark">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">¿Qué puedes encontrar?</p>
+          <p class="eyebrow">Terraza Miami</p>
 
           <h2>Para cualquier momento del día</h2>
+
+          <p>
+            Un espacio para venir a tomar algo, comer, cenar o simplemente
+            disfrutar de la tarde.
+          </p>
         </div>
 
         <div class="features">
           <article class="feature">
             <h3>Tapas y raciones</h3>
 
-            <p>Para compartir y disfrutar con amigos.</p>
+            <p>Para compartir y disfrutar sin prisas.</p>
           </article>
 
           <article class="feature">
             <h3>Comidas y cenas</h3>
 
-            <p>Un sitio donde sentarte, comer y disfrutar sin prisas.</p>
+            <p>
+              Opciones para disfrutar de una comida o una cena en buena
+              compañía.
+            </p>
           </article>
 
           <article class="feature">
             <h3>Cafés y copas</h3>
 
-            <p>
-              Desde un café por la tarde hasta una copa para terminar el día.
-            </p>
+            <p>Un café por la tarde o una copa para terminar el día.</p>
           </article>
 
           <article class="feature">
-            <h3>Terraza</h3>
+            <h3>Nuestra terraza</h3>
 
             <p>
-              Un espacio al aire libre junto al parque para disfrutar del buen
-              tiempo.
+              Un espacio al aire libre junto al parque, con buena música y buen
+              ambiente.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- TERRAZA -->
-
-    <section class="section">
-      <div class="container two-columns">
-        <div>
-          <p class="eyebrow">Nuestro espacio</p>
-
-          <h2>Una terraza para disfrutar</h2>
-
-          <p>
-            Buena música, buen ambiente y una terraza junto al parque hacen de
-            Terraza Miami un lugar pensado para pasar un buen rato.
-          </p>
-
-          <p>
-            Ya sea para comer, tomar algo por la tarde o quedar con amigos, aquí
-            tienes un espacio para disfrutar de Puebla del Prior.
-          </p>
-        </div>
-
-        <div class="placeholder-image">
-          <span> Próximamente fotografía de la terraza </span>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESEÑAS -->
+    <!-- ENTORNO -->
 
     <section class="section section-dark">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Opiniones</p>
+      <div class="container two-columns">
+        <div>
+          <p class="eyebrow">Nuestro entorno</p>
 
-          <h2>Lo importante es la gente</h2>
+          <h2>Terraza, parque y buena compañía</h2>
 
           <p>
-            Próximamente mostraremos aquí las opiniones de nuestros clientes.
+            Terraza Miami está situada junto al parque de Puebla del Prior, un
+            entorno perfecto para disfrutar de una tarde tranquila o compartir
+            un buen rato con amigos.
           </p>
+
+          <p>Buena gente, buena música y un ambiente pensado para disfrutar.</p>
+        </div>
+
+        <div class="highlight-box">
+          <p class="highlight-text">Buenos momentos, sin complicaciones.</p>
         </div>
       </div>
     </section>
 
-    <!-- CONTACTO -->
+    <!-- CARTA -->
 
     <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Para comer</p>
+
+          <h2>Algunos de nuestros platos</h2>
+
+          <p>
+            Consulta nuestra carta para descubrir todo lo que tenemos para
+            ofrecerte.
+          </p>
+        </div>
+
+        <div class="menu-preview">
+          <article class="menu-preview-item">
+            <div>
+              <h3>Montados de lomo</h3>
+            </div>
+
+            <strong> 2 € </strong>
+          </article>
+
+          <article class="menu-preview-item">
+            <div>
+              <h3>Rejos</h3>
+            </div>
+
+            <strong> 10 € </strong>
+          </article>
+
+          <article class="menu-preview-item">
+            <div>
+              <h3>Calamares</h3>
+            </div>
+
+            <strong> 10 € </strong>
+          </article>
+
+          <article class="menu-preview-item">
+            <div>
+              <h3>Bocadillos</h3>
+
+              <p>Lomo, bacon o pollo.</p>
+            </div>
+
+            <strong> 5 € </strong>
+          </article>
+
+          <article class="menu-preview-item">
+            <div>
+              <h3>Hamburguesas</h3>
+            </div>
+
+            <strong> 4 € </strong>
+          </article>
+        </div>
+
+        <div class="section-action">
+          <a class="button" href="/carta"> Ver carta completa </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HORARIO -->
+
+    <section class="section section-dark">
       <div class="container contact-section">
         <div>
           <p class="eyebrow">Ven a visitarnos</p>
 
-          <h2>Terraza Miami</h2>
+          <h2>Estamos en Puebla del Prior</h2>
 
-          <address>
+          <p>
             Cam. Puebla del Prior<br />
             06229 Puebla del Prior, Badajoz
-          </address>
+          </p>
+
+          <p>
+            <a href="tel:+34675326150"> 675 326 150 </a>
+          </p>
         </div>
 
         <div>
           <h3>Horario</h3>
 
-          <p>
-            Miércoles a lunes<br />
-            12:00–16:00<br />
-            20:00–cierre
-          </p>
+          <div class="opening-hours">
+            <p>
+              <strong>Lunes</strong>
+              <span>12:00–16:00 · 20:00–01:00</span>
+            </p>
 
-          <p>
-            <strong>Martes: cerrado</strong>
-          </p>
+            <p>
+              <strong>Martes</strong>
+              <span>Cerrado</span>
+            </p>
+
+            <p>
+              <strong>Miércoles</strong>
+              <span>12:00–16:00 · 20:00–01:00</span>
+            </p>
+
+            <p>
+              <strong>Jueves</strong>
+              <span>12:00–16:00 · 20:00–01:00</span>
+            </p>
+
+            <p>
+              <strong>Viernes</strong>
+              <span>12:00–16:00 · 20:00–02:00</span>
+            </p>
+
+            <p>
+              <strong>Sábado</strong>
+              <span>12:00–16:00 · 20:00–02:00</span>
+            </p>
+
+            <p>
+              <strong>Domingo</strong>
+              <span>12:00–16:00 · 20:00–01:00</span>
+            </p>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h3>Contacto</h3>
+    <!-- CTA FINAL -->
 
-          <p>
-            <a href="tel:+34675326150"> 675 326 150 </a>
-          </p>
+    <section class="section final-cta">
+      <div class="container">
+        <p class="eyebrow">Terraza Miami</p>
 
+        <h2>¿Nos vemos?</h2>
+
+        <p>Llámanos o escríbenos por WhatsApp.</p>
+
+        <div class="hero-actions">
           <a
+            class="button"
             href="https://wa.me/34675326150"
             target="_blank"
             rel="noopener noreferrer"
           >
             Escribir por WhatsApp
           </a>
+
+          <a class="button button-secondary" href="/contacto"> Cómo llegar </a>
         </div>
       </div>
     </section>
