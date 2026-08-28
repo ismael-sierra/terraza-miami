@@ -6,47 +6,161 @@ import "../styles/global.css";
 ---
 
 <BaseLayout
-  title="Contacto | Terraza Miami"
-  description="Contacta con Terraza Miami en Puebla del Prior. Consulta nuestra ubicación, teléfono y horario."
+  title="Contacto y ubicación | Terraza Miami"
+  description="Encuentra Terraza Miami en Puebla del Prior, Badajoz. Consulta nuestra dirección, horario y formas de contacto."
 >
   <Header />
 
   <main>
-    <section class="section">
+    <section class="section contact-page">
       <div class="container">
-        <p class="eyebrow">Contacto</p>
+        <div class="section-heading">
+          <p class="eyebrow">Terraza Miami</p>
 
-        <h1>Ven a visitarnos</h1>
+          <h1>Ven a visitarnos</h1>
 
-        <p class="intro">Estamos en Puebla del Prior, en el Parque de la Hispanidad.</p>
+          <p>
+            Estamos en Puebla del Prior, Badajoz. Aquí tienes toda la
+            información para encontrarnos y ponerte en contacto con nosotros.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- UBICACIÓN -->
+
+          <article class="contact-card">
+            <h2>Dirección</h2>
+
+            <address>
+              Cam. Puebla del Prior<br />
+              06229 Puebla del Prior<br />
+              Badajoz
+            </address>
+
+            <a
+              class="button"
+              href="https://maps.app.goo.gl/XgYzDffrtqNLb58V9"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Cómo llegar
+            </a>
+          </article>
+
+          <!-- CONTACTO -->
+
+          <article class="contact-card">
+            <h2>Contacto</h2>
+
+            <p>
+              <strong>Teléfono</strong><br />
+
+              <a href="tel:+34675326150"> 675 326 150 </a>
+            </p>
+
+            <p>También puedes escribirnos directamente por WhatsApp.</p>
+
+            <a
+              class="button"
+              href="https://wa.me/34675326150"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Escribir por WhatsApp
+            </a>
+          </article>
+
+          <!-- HORARIO -->
+
+          <article class="contact-card">
+            <h2>Horario</h2>
+
+            <div class="opening-hours">
+              <p>
+                <strong>Lunes</strong>
+                <span>12:00–16:00 <br> 20:00–01:00</span>
+              </p>
+
+              <p>
+                <strong>Martes</strong>
+                <span>Cerrado</span>
+              </p>
+
+              <p>
+                <strong>Miércoles</strong>
+                <span>12:00–16:00 <br> 20:00–01:00</span>
+              </p>
+
+              <p>
+                <strong>Jueves</strong>
+                <span>12:00–16:00 <br> 20:00–01:00</span>
+              </p>
+
+              <p>
+                <strong>Viernes</strong>
+                <span>12:00–16:00 <br> 20:00–02:00</span>
+              </p>
+
+              <p>
+                <strong>Sábado</strong>
+                <span>12:00–16:00 <br> 20:00–02:00</span>
+              </p>
+
+              <p>
+                <strong>Domingo</strong>
+                <span>12:00–16:00 <br> 20:00–01:00</span>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- MAPA -->
+
+        <div class="map-section">
+          <div class="section-heading">
+            <p class="eyebrow">Ubicación</p>
+
+            <h2>¿Dónde estamos?</h2>
+          </div>
+
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3700.23029819393!2d-6.1974161!3d38.57054790000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd14092a6baeba51%3A0x94ac90d5b47e1f7c!2sParque%20la%20hispanidad!5e1!3m2!1ses!2ses!4v1787933619468!5m2!1ses!2ses"
+              width="600"
+              height="450"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+
+    <section class="section section-dark final-cta">
+      <div class="container">
+        <p class="eyebrow">Terraza Miami</p>
+
+        <h2>Te esperamos</h2>
 
         <p>
-          <strong>Teléfono:</strong>
-          <a href="tel:+34675326150"> 675 326 150 </a>
+          Si tienes alguna duda, puedes llamarnos o escribirnos por WhatsApp.
         </p>
 
-        <p>
-          <strong>Dirección:</strong><br />
-          Cam. Puebla del Prior<br />
-          06229 Puebla del Prior, Badajoz
-        </p>
+        <div class="hero-actions">
+          <a class="button" href="tel:+34675326150"> Llamar </a>
 
-        <p>
-          <strong>Horario:</strong><br />
-          Miércoles a lunes: 12:00–16:00 y 20:00–cierre<br />
-          Martes: cerrado
-        </p>
-
-        <p>
           <a
-            class="button"
+            class="button button-secondary"
             href="https://wa.me/34675326150"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Escribir por WhatsApp
+            WhatsApp
           </a>
-        </p>
+        </div>
       </div>
     </section>
   </main>
