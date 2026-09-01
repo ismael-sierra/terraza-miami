@@ -48,9 +48,12 @@ import "../styles/global.css";
 
   <main>
     <!-- HERO -->
-
     <section class="hero">
-      <div class="container">
+      <img class="hero-background" src="/images/cabecera.jpg" alt="" />
+
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
         <img class="hero-logo" src="/images/logo.jpg" alt="Terraza Miami" />
 
         <p class="eyebrow">Puebla del Prior · Badajoz</p>
@@ -152,6 +155,109 @@ import "../styles/global.css";
       </div>
     </section>
 
+    <!-- GALERÍA -->
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Conócenos</p>
+          <h2>Así es Terraza Miami</h2>
+          <p>
+            Un espacio para disfrutar de la terraza, la comida y el buen
+            ambiente.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <button
+            class="gallery-item"
+            type="button"
+            aria-label="Ver imagen de Terraza Miami"
+            data-lightbox="/images/terraza-miami_01.jpeg"
+          >
+            <img
+              src="/images/terraza-miami_01.jpeg"
+              alt="Terraza Miami en Puebla del Prior"
+              loading="lazy"
+            />
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            aria-label="Ver imagen de Terraza Miami"
+            data-lightbox="/images/terraza-miami_02.jpeg"
+          >
+            <img
+              src="/images/terraza-miami_02.jpeg"
+              alt="Terraza Miami en Puebla del Prior"
+              loading="lazy"
+            />
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            aria-label="Ver imagen de Terraza Miami"
+            data-lightbox="/images/terraza-miami_03.jpeg"
+          >
+            <img
+              src="/images/terraza-miami_03.jpeg"
+              alt="Terraza Miami en Puebla del Prior"
+              loading="lazy"
+            />
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            aria-label="Ver imagen de Terraza Miami"
+            data-lightbox="/images/terraza-miami_04.jpeg"
+          >
+            <img
+              src="/images/terraza-miami_04.jpeg"
+              alt="Ambiente de Terraza Miami"
+              loading="lazy"
+            />
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            aria-label="Ver imagen de Terraza Miami"
+            data-lightbox="/images/terraza-miami_05.jpeg"
+          >
+            <img
+              src="/images/terraza-miami_05.jpeg"
+              alt="Clientes disfrutando de Terraza Miami"
+              loading="lazy"
+            />
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            aria-label="Ver imagen de Terraza Miami"
+            data-lightbox="/images/terraza-miami_06.jpeg"
+          >
+            <img
+              src="/images/terraza-miami_06.jpeg"
+              alt="Equipo de Terraza Miami"
+              loading="lazy"
+            />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" type="button" aria-label="Cerrar imagen">
+        ×
+      </button>
+
+      <img class="lightbox-image" src="" alt="" />
+    </div>
+
     <!-- CARTA -->
 
     <section class="section">
@@ -159,7 +265,7 @@ import "../styles/global.css";
         <div class="section-heading">
           <p class="eyebrow">Para comer</p>
 
-          <h2>Algunos de nuestros platos</h2>
+          <h2>Descubre nuestra carta</h2>
 
           <p>
             Consulta nuestra carta para descubrir todo lo que tenemos para
@@ -170,10 +276,10 @@ import "../styles/global.css";
         <div class="menu-preview">
           <article class="menu-preview-item">
             <div>
-              <h3>Montados de lomo</h3>
+              <h3>Montados</h3>
             </div>
 
-            <strong> 2 € </strong>
+            <strong> 2,50 € </strong>
           </article>
 
           <article class="menu-preview-item">
@@ -222,22 +328,44 @@ import "../styles/global.css";
     <section class="section">
       <div class="container">
         <div class="section-heading">
-          <p class="eyebrow">Lo que importa</p>
+          <p class="eyebrow">Nuestros clientes</p>
 
-          <h2>Opiniones de nuestros clientes</h2>
+          <h2>Lo que dicen de nosotros</h2>
 
           <p>
-            Estamos preparando este espacio para recoger las opiniones de
-            quienes nos visitan.
+            Terraza Miami cuenta con opiniones de clientes que han disfrutado
+            del bar, la terraza y su ambiente.
           </p>
         </div>
 
-        <div class="reviews-placeholder">
-          <div class="review-placeholder-icon" aria-hidden="true">★</div>
+        <div class="reviews-summary">
+          <div class="reviews-score">
+            <strong> 4,2 </strong>
 
-          <h3>Próximamente</h3>
+            <div class="reviews-stars" aria-label="Valoración de 4,2 sobre 5">
+              ★★★★★
+            </div>
 
-          <p>Aquí mostraremos opiniones reales de nuestros clientes.</p>
+            <p>16 opiniones en Google</p>
+          </div>
+
+          <div class="reviews-info">
+            <h3>¿Ya nos has visitado?</h3>
+
+            <p>
+              Tu opinión nos ayuda a seguir mejorando y también puede ayudar a
+              otras personas a conocernos.
+            </p>
+
+            <a
+              class="button"
+              href="https://www.google.com/maps/place/Parque+la+hispanidad/@38.5672318,-6.1904581,1429m/data=!3m1!1e3!4m8!3m7!1s0xd14092a6baeba51:0x94ac90d5b47e1f7c!8m2!3d38.5694522!4d-6.1939954!9m1!1b1!16s%2Fg%2F11c0rnlm4y?entry=ttu&g_ep=EgoyMDI2MDgyNi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver opiniones en Google
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -331,4 +459,62 @@ import "../styles/global.css";
   </main>
 
   <Footer />
+
+  <script>
+    const lightbox = document.querySelector<HTMLDivElement>("#lightbox");
+    const lightboxImage =
+      document.querySelector<HTMLImageElement>(".lightbox-image");
+    const closeButton =
+      document.querySelector<HTMLButtonElement>(".lightbox-close");
+    const galleryItems =
+      document.querySelectorAll<HTMLButtonElement>("[data-lightbox]");
+
+    function openLightbox(src: string, alt: string) {
+      if (!lightbox || !lightboxImage) return;
+
+      lightboxImage.src = src;
+      lightboxImage.alt = alt || "Imagen de Terraza Miami";
+
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      if (!lightbox || !lightboxImage) return;
+
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+
+      setTimeout(() => {
+        lightboxImage.src = "";
+      }, 200);
+    }
+
+    galleryItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const src = item.getAttribute("data-lightbox");
+        const image = item.querySelector<HTMLImageElement>("img");
+
+        if (src) {
+          openLightbox(src, image?.alt || "");
+        }
+      });
+    });
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
+  </script>
 </BaseLayout>
