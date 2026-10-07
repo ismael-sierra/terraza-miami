@@ -12,7 +12,7 @@ import "../../styles/global.css";
   <Header />
 
   <main>
-    <article>
+    <article class="news-detail">
       <!-- CABECERA -->
       <section class="section">
         <div class="container">
@@ -26,7 +26,7 @@ import "../../styles/global.css";
             de ambiente, encuentros y buenos momentos.
           </p>
 
-          <p class="news-date">Actualizado en 2026</p>
+          <p class="news-date">Agosto 2026</p>
         </div>
       </section>
 
@@ -213,6 +213,15 @@ import "../../styles/global.css";
           </div>
         </div>
       </section>
+
+      <!-- VOLVER A NOTICIAS -->
+      <section class="section">
+        <div class="container">
+          <div class="news-detail-back">
+            <a class="news-link" href="/noticias"> ← Volver a noticias </a>
+          </div>
+        </div>
+      </section>
     </article>
   </main>
 
@@ -229,16 +238,22 @@ import "../../styles/global.css";
 
   <!-- LIGHTBOX SCRIPT -->
   <script>
-    const lightbox = document.querySelector("#lightbox");
-    const lightboxImage = document.querySelector(".lightbox-image");
-    const closeButton = document.querySelector(".lightbox-close");
-    const galleryItems = document.querySelectorAll("[data-lightbox]");
+    const lightbox = document.querySelector<HTMLDivElement>("#lightbox");
+
+    const lightboxImage =
+      document.querySelector<HTMLImageElement>(".lightbox-image");
+
+    const closeButton =
+      document.querySelector<HTMLButtonElement>(".lightbox-close");
+
+    const galleryItems =
+      document.querySelectorAll<HTMLButtonElement>("[data-lightbox]");
 
     function openLightbox(src: string, alt: string) {
       if (!lightbox || !lightboxImage) return;
 
-      lightboxImage.setAttribute("src", src);
-      lightboxImage.setAttribute("alt", alt || "Imagen de Terraza Miami");
+      lightboxImage.src = src;
+      lightboxImage.alt = alt || "Imagen de Terraza Miami";
 
       lightbox.classList.add("is-open");
       lightbox.setAttribute("aria-hidden", "false");
@@ -255,17 +270,17 @@ import "../../styles/global.css";
       document.body.style.overflow = "";
 
       setTimeout(() => {
-        lightboxImage.setAttribute("src", "");
+        lightboxImage.src = "";
       }, 200);
     }
 
     galleryItems.forEach((item) => {
       item.addEventListener("click", () => {
         const src = item.getAttribute("data-lightbox");
-        const image = item.querySelector("img");
+        const image = item.querySelector<HTMLImageElement>("img");
 
         if (src) {
-          openLightbox(src, image?.getAttribute("alt") || "");
+          openLightbox(src, image?.alt || "");
         }
       });
     });
