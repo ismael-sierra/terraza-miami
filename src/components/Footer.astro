@@ -1,3 +1,10 @@
+---
+import { negocio } from "../data/negocio";
+
+const { direccion, horarioResumen, redes } = negocio;
+const anioActual = new Date().getFullYear();
+---
+
 <footer class="site-footer">
   <div class="container footer-content">
     <div class="footer-brand">
@@ -12,12 +19,13 @@
       <h2>Contacto</h2>
 
       <p>
-        <a href="tel:+34675326150">675 326 150</a>
+        <a href={negocio.telefono.enlace}>{negocio.telefono.visible}</a>
       </p>
 
       <p>
-        Carretera Hornachos - Villafranca de los Barros<br />
-        06229 Puebla del Prior, Badajoz
+        {direccion.calle}<br />
+        {direccion.codigoPostal}
+        {direccion.localidad}, {direccion.provincia}
       </p>
     </div>
 
@@ -25,13 +33,11 @@
       <h2>Horario</h2>
 
       <p>
-        Miércoles a lunes<br />
-        12:00–16:00<br />
-        20:00–cierre
+        {horarioResumen.lineas.map((linea, i) => (i > 0 ? [<br />, linea] : linea))}
       </p>
 
       <p>
-        <strong>Martes: cerrado</strong>
+        <strong>{horarioResumen.cerrado}</strong>
       </p>
     </div>
 
@@ -47,11 +53,11 @@
   </div>
 
   <div class="container footer-bottom">
-    <p>© 2026 Terraza Miami. Todos los derechos reservados.</p>
+    <p>© {anioActual} Terraza Miami. Todos los derechos reservados.</p>
 
     <div class="footer-social">
       <a
-        href="https://www.facebook.com/profile.php?id=61591632389910"
+        href={redes.facebook}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Facebook de Terraza Miami"
@@ -62,7 +68,7 @@
       <span aria-hidden="true">·</span>
 
       <a
-        href="https://www.instagram.com/miamiterraza/"
+        href={redes.instagram}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram de Terraza Miami"

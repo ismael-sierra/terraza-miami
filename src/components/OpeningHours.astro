@@ -1,0 +1,27 @@
+---
+import { negocio } from "../data/negocio";
+
+interface Props {
+  // "linea" pone cada tramo en una línea; "punto" los separa con " · ".
+  formato?: "linea" | "punto";
+}
+
+const { formato = "punto" } = Astro.props;
+---
+
+<div class="opening-hours">
+  {
+    negocio.horario.map(({ dia, tramos }) => (
+      <p>
+        <strong>{dia}</strong>
+        <span>
+          {tramos.length === 0
+            ? "Cerrado"
+            : formato === "punto"
+              ? tramos.join(" · ")
+              : tramos.map((tramo, i) => (i > 0 ? [<br />, tramo] : tramo))}
+        </span>
+      </p>
+    ))
+  }
+</div>

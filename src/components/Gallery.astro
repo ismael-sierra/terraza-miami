@@ -1,0 +1,105 @@
+---
+interface Props {
+  imagenes: { src: string; alt: string }[];
+}
+
+const { imagenes } = Astro.props;
+---
+
+<div class="gallery">
+  {
+    imagenes.map(({ src, alt }) => (
+      <button
+        class="gallery-item"
+        type="button"
+        aria-label={`Ampliar imagen: ${alt}`}
+        data-lightbox={src}
+      >
+        <img src={src} alt={alt} loading="lazy" />
+      </button>
+    ))
+  }
+</div>
+
+<div
+  class="lightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Imagen ampliada"
+  aria-hidden="true"
+>
+  <button class="lightbox-close" type="button" aria-label="Cerrar imagen">
+    ×
+  </button>
+
+  <img class="lightbox-image" src="" alt="" />
+</div>
+
+<script>
+  const lightbox = document.querySelector<HTMLDivElement>(".lightbox");
+  const lightboxImage =
+    document.querySelector<HTMLImageElement>(".lightbox-image");
+  const closeButton =
+    document.querySelector<HTMLButtonElement>(".lightbox-close");
+
+  // Botón que abrió la imagen, para devolverle el foco al cerrar.
+  let lastTrigger: HTMLElement | null = null;
+
+  function isOpen() {
+    return lightbox?.classList.contains("is-open") ?? false;
+  }
+
+  function openLightbox(trigger: HTMLButtonElement) {
+    const src = trigger.dataset.lightbox;
+    if (!lightbox || !lightboxImage || !closeButton || !src) return;
+
+    lightboxImage.src = src;
+    lightboxImage.alt = trigger.querySelector("img")?.alt ?? "";
+
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    lastTrigger = trigger;
+    closeButton.focus();
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightboxImage || !isOpen()) return;
+
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+
+    lastTrigger?.focus();
+
+    // Se vacía tras la animación de cierre, salvo que se haya vuelto a abrir.
+    setTimeout(() => {
+      if (!isOpen()) lightboxImage.src = "";
+    }, 200);
+  }
+
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-lightbox]")
+    .forEach((item) => {
+      item.addEventListener("click", () => openLightbox(item));
+    });
+
+  closeButton?.addEventListener("click", closeLightbox);
+
+  lightbox?.addEventListener("click", (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!isOpen()) return;
+
+    if (event.key === "Escape") closeLightbox();
+
+    // El único elemento enfocable es el botón de cerrar: el foco no sale del diálogo.
+    if (event.key === "Tab") {
+      event.preventDefault();
+      closeButton?.focus();
+    }
+  });
+</script>

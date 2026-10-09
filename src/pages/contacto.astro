@@ -2,7 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import "../styles/global.css";
+import OpeningHours from "../components/OpeningHours.astro";
+import { negocio } from "../data/negocio";
 ---
 
 <BaseLayout
@@ -32,14 +33,15 @@ import "../styles/global.css";
             <h2>Dirección</h2>
 
             <address>
-              Carretera Hornachos - Villafranca de los Barros<br />
-              06229 Puebla del Prior<br />
-              Badajoz
+              {negocio.direccion.calle}<br />
+              {negocio.direccion.codigoPostal}
+              {negocio.direccion.localidad}<br />
+              {negocio.direccion.provincia}
             </address>
 
             <a
               class="button"
-              href="https://maps.app.goo.gl/XgYzDffrtqNLb58V9"
+              href={negocio.mapas.comoLlegar}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -55,14 +57,14 @@ import "../styles/global.css";
             <p>
               <strong>Teléfono</strong><br />
 
-              <a href="tel:+34675326150"> 675 326 150 </a>
+              <a href={negocio.telefono.enlace}>{negocio.telefono.visible}</a>
             </p>
 
             <p>También puedes escribirnos directamente por WhatsApp.</p>
 
             <a
               class="button"
-              href="https://wa.me/34675326150"
+              href={negocio.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -75,42 +77,7 @@ import "../styles/global.css";
           <article class="contact-card">
             <h2>Horario</h2>
 
-            <div class="opening-hours">
-              <p>
-                <strong>Lunes</strong>
-                <span>12:00–16:00 <br> 20:00–01:00</span>
-              </p>
-
-              <p>
-                <strong>Martes</strong>
-                <span>Cerrado</span>
-              </p>
-
-              <p>
-                <strong>Miércoles</strong>
-                <span>12:00–16:00 <br> 20:00–01:00</span>
-              </p>
-
-              <p>
-                <strong>Jueves</strong>
-                <span>12:00–16:00 <br> 20:00–01:00</span>
-              </p>
-
-              <p>
-                <strong>Viernes</strong>
-                <span>12:00–16:00 <br> 20:00–02:00</span>
-              </p>
-
-              <p>
-                <strong>Sábado</strong>
-                <span>12:00–16:00 <br> 20:00–02:00</span>
-              </p>
-
-              <p>
-                <strong>Domingo</strong>
-                <span>12:00–16:00 <br> 20:00–01:00</span>
-              </p>
-            </div>
+            <OpeningHours formato="linea" />
           </article>
         </div>
 
@@ -125,11 +92,11 @@ import "../styles/global.css";
 
           <div class="map-container">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3700.23029819393!2d-6.1974161!3d38.57054790000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd14092a6baeba51%3A0x94ac90d5b47e1f7c!2sParque%20la%20hispanidad!5e1!3m2!1ses!2ses!4v1787933619468!5m2!1ses!2ses"
+              src={negocio.mapas.embed}
+              title="Mapa de la ubicación de Terraza Miami"
               width="600"
               height="450"
-              style="border:0;"
-              allowfullscreen=""
+              allowfullscreen
               loading="lazy"
               referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
@@ -150,11 +117,11 @@ import "../styles/global.css";
         </p>
 
         <div class="hero-actions">
-          <a class="button" href="tel:+34675326150"> Llamar </a>
+          <a class="button" href={negocio.telefono.enlace}> Llamar </a>
 
           <a
             class="button button-secondary"
-            href="https://wa.me/34675326150"
+            href={negocio.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
           >

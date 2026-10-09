@@ -1,5 +1,21 @@
 ---
+const enlaces = [
+  { href: "/", texto: "Inicio" },
+  { href: "/carta", texto: "Carta" },
+  { href: "/nosotros", texto: "Nosotros" },
+  { href: "/resenas", texto: "Reseñas" },
+  { href: "/noticias", texto: "Noticias" },
+  { href: "/contacto", texto: "Contacto" },
+];
 
+const rutaActual = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+// "page" en la página exacta; "true" en las subpáginas (por ejemplo, una noticia).
+function estadoEnlace(href: string) {
+  if (rutaActual === href) return "page";
+  if (href !== "/" && rutaActual.startsWith(`${href}/`)) return "true";
+  return undefined;
+}
 ---
 
 <header class="site-header">
@@ -24,12 +40,13 @@
       class="main-navigation"
       aria-label="Navegación principal"
     >
-      <a href="/">Inicio</a>
-      <a href="/carta">Carta</a>
-      <a href="/nosotros">Nosotros</a>
-      <a href="/reseñas">Reseñas</a>
-      <a href="/noticias">Noticias</a>
-      <a href="/contacto">Contacto</a>
+      {
+        enlaces.map(({ href, texto }) => (
+          <a href={href} aria-current={estadoEnlace(href)}>
+            {texto}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </header>

@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import "../styles/global.css";
+import { negocio } from "../data/negocio";
 ---
 
 <BaseLayout
@@ -32,13 +32,17 @@ import "../styles/global.css";
       <div class="container">
         <div class="reviews-overview">
           <div class="reviews-big-score">
-            <strong>4,3</strong>
+            <strong>{negocio.valoracion.nota}</strong>
 
-            <div class="reviews-stars" aria-label="Valoración de 4,3 sobre 5">
+            <div
+              class="reviews-stars"
+              role="img"
+              aria-label={`Valoración de ${negocio.valoracion.nota} sobre 5`}
+            >
               ★★★★★
             </div>
 
-            <p>18 opiniones en Google</p>
+            <p>{negocio.valoracion.opiniones} opiniones en Google</p>
           </div>
 
           <div class="reviews-overview-text">
@@ -53,7 +57,7 @@ import "../styles/global.css";
 
             <a
               class="button"
-              href="https://www.google.es/maps/place/Parque+la+hispanidad/@38.5677406,-6.1930035,715m/data=!3m1!1e3!4m8!3m7!1s0xd14092a6baeba51:0x94ac90d5b47e1f7c!8m2!3d38.5694522!4d-6.1939954!9m1!1b1!16s%2Fg%2F11c0rnlm4y?entry=ttu&g_ep=EgoyMDI2MDgzMC4wIKXMDSoASAFQAw%3D%3D"
+              href={negocio.mapas.resenas}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -90,7 +94,7 @@ import "../styles/global.css";
 
           <a
             class="button"
-            href="https://www.google.es/maps/place/Parque+la+hispanidad/@38.5677406,-6.1930035,715m/data=!3m1!1e3!4m8!3m7!1s0xd14092a6baeba51:0x94ac90d5b47e1f7c!8m2!3d38.5694522!4d-6.1939954!9m1!1b1!16s%2Fg%2F11c0rnlm4y?entry=ttu&g_ep=EgoyMDI2MDgzMC4wIKXMDSoASAFQAw%3D%3D"
+            href={negocio.mapas.resenas}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -117,7 +121,7 @@ import "../styles/global.css";
 
           <a
             class="button button-secondary"
-            href="https://wa.me/34675326150"
+            href={negocio.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -2,7 +2,19 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import "../styles/global.css";
+import Gallery from "../components/Gallery.astro";
+import OpeningHours from "../components/OpeningHours.astro";
+import { negocio } from "../data/negocio";
+import { destacados, formatearPrecio } from "../data/carta";
+
+const galeria = [
+  { src: "/images/terraza-miami_01.jpeg", alt: "Terraza Miami en Puebla del Prior" },
+  { src: "/images/terraza-miami_02.jpeg", alt: "Terraza Miami en Puebla del Prior" },
+  { src: "/images/terraza-miami_03.jpeg", alt: "Terraza Miami en Puebla del Prior" },
+  { src: "/images/terraza-miami_04.jpeg", alt: "Ambiente de Terraza Miami" },
+  { src: "/images/terraza-miami_05.jpeg", alt: "Clientes disfrutando de Terraza Miami" },
+  { src: "/images/terraza-miami_06.jpeg", alt: "Equipo de Terraza Miami" },
+];
 ---
 
 <script
@@ -68,14 +80,14 @@ import "../styles/global.css";
         <div class="hero-actions">
           <a
             class="button"
-            href="https://wa.me/34675326150"
+            href={negocio.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
           >
             WhatsApp
           </a>
 
-          <a class="button button-secondary" href="tel:+34675326150">
+          <a class="button button-secondary" href={negocio.telefono.enlace}>
             Llamar
           </a>
         </div>
@@ -167,96 +179,9 @@ import "../styles/global.css";
           </p>
         </div>
 
-        <div class="gallery">
-          <button
-            class="gallery-item"
-            type="button"
-            aria-label="Ver imagen de Terraza Miami"
-            data-lightbox="/images/terraza-miami_01.jpeg"
-          >
-            <img
-              src="/images/terraza-miami_01.jpeg"
-              alt="Terraza Miami en Puebla del Prior"
-              loading="lazy"
-            />
-          </button>
-
-          <button
-            class="gallery-item"
-            type="button"
-            aria-label="Ver imagen de Terraza Miami"
-            data-lightbox="/images/terraza-miami_02.jpeg"
-          >
-            <img
-              src="/images/terraza-miami_02.jpeg"
-              alt="Terraza Miami en Puebla del Prior"
-              loading="lazy"
-            />
-          </button>
-
-          <button
-            class="gallery-item"
-            type="button"
-            aria-label="Ver imagen de Terraza Miami"
-            data-lightbox="/images/terraza-miami_03.jpeg"
-          >
-            <img
-              src="/images/terraza-miami_03.jpeg"
-              alt="Terraza Miami en Puebla del Prior"
-              loading="lazy"
-            />
-          </button>
-
-          <button
-            class="gallery-item"
-            type="button"
-            aria-label="Ver imagen de Terraza Miami"
-            data-lightbox="/images/terraza-miami_04.jpeg"
-          >
-            <img
-              src="/images/terraza-miami_04.jpeg"
-              alt="Ambiente de Terraza Miami"
-              loading="lazy"
-            />
-          </button>
-
-          <button
-            class="gallery-item"
-            type="button"
-            aria-label="Ver imagen de Terraza Miami"
-            data-lightbox="/images/terraza-miami_05.jpeg"
-          >
-            <img
-              src="/images/terraza-miami_05.jpeg"
-              alt="Clientes disfrutando de Terraza Miami"
-              loading="lazy"
-            />
-          </button>
-
-          <button
-            class="gallery-item"
-            type="button"
-            aria-label="Ver imagen de Terraza Miami"
-            data-lightbox="/images/terraza-miami_06.jpeg"
-          >
-            <img
-              src="/images/terraza-miami_06.jpeg"
-              alt="Equipo de Terraza Miami"
-              loading="lazy"
-            />
-          </button>
-        </div>
+        <Gallery imagenes={galeria} />
       </div>
     </section>
-
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox" aria-hidden="true">
-      <button class="lightbox-close" type="button" aria-label="Cerrar imagen">
-        ×
-      </button>
-
-      <img class="lightbox-image" src="" alt="" />
-    </div>
 
     <!-- CARTA -->
 
@@ -274,47 +199,19 @@ import "../styles/global.css";
         </div>
 
         <div class="menu-preview">
-          <article class="menu-preview-item">
-            <div>
-              <h3>Montados</h3>
-            </div>
+          {
+            destacados.map((plato) => (
+              <article class="menu-preview-item">
+                <div>
+                  <h3>{plato.nombre}</h3>
 
-            <strong> 2,50 € </strong>
-          </article>
+                  {plato.descripcion && <p>{plato.descripcion}</p>}
+                </div>
 
-          <article class="menu-preview-item">
-            <div>
-              <h3>Rejos</h3>
-            </div>
-
-            <strong> 10 € </strong>
-          </article>
-
-          <article class="menu-preview-item">
-            <div>
-              <h3>Calamares</h3>
-            </div>
-
-            <strong> 10 € </strong>
-          </article>
-
-          <article class="menu-preview-item">
-            <div>
-              <h3>Bocadillos</h3>
-
-              <p>Lomo, bacon o pollo.</p>
-            </div>
-
-            <strong> 5 € </strong>
-          </article>
-
-          <article class="menu-preview-item">
-            <div>
-              <h3>Hamburguesas</h3>
-            </div>
-
-            <strong> 4 € </strong>
-          </article>
+                <strong>{formatearPrecio(plato.precio)}</strong>
+              </article>
+            ))
+          }
         </div>
 
         <div class="section-action">
@@ -340,13 +237,17 @@ import "../styles/global.css";
 
         <div class="reviews-summary">
           <div class="reviews-score">
-            <strong> 4,2 </strong>
+            <strong>{negocio.valoracion.nota}</strong>
 
-            <div class="reviews-stars" aria-label="Valoración de 4,2 sobre 5">
+            <div
+              class="reviews-stars"
+              role="img"
+              aria-label={`Valoración de ${negocio.valoracion.nota} sobre 5`}
+            >
               ★★★★★
             </div>
 
-            <p>16 opiniones en Google</p>
+            <p>{negocio.valoracion.opiniones} opiniones en Google</p>
           </div>
 
           <div class="reviews-info">
@@ -359,7 +260,7 @@ import "../styles/global.css";
 
             <a
               class="button"
-              href="https://www.google.com/maps/place/Parque+la+hispanidad/@38.5672318,-6.1904581,1429m/data=!3m1!1e3!4m8!3m7!1s0xd14092a6baeba51:0x94ac90d5b47e1f7c!8m2!3d38.5694522!4d-6.1939954!9m1!1b1!16s%2Fg%2F11c0rnlm4y?entry=ttu&g_ep=EgoyMDI2MDgyNi4wIKXMDSoASAFQAw%3D%3D"
+              href={negocio.mapas.resenas}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -380,54 +281,20 @@ import "../styles/global.css";
           <h2>Estamos en Puebla del Prior</h2>
 
           <p>
-            Carretera Hornachos - Villafranca de los Barros<br />
-            06229 Puebla del Prior, Badajoz
+            {negocio.direccion.calle}<br />
+            {negocio.direccion.codigoPostal} {negocio.direccion.localidad},
+            {negocio.direccion.provincia}
           </p>
 
           <p>
-            <a href="tel:+34675326150"> 675 326 150 </a>
+            <a href={negocio.telefono.enlace}>{negocio.telefono.visible}</a>
           </p>
         </div>
 
         <div>
           <h3>Horario</h3>
 
-          <div class="opening-hours">
-            <p>
-              <strong>Lunes</strong>
-              <span>12:00–16:00 · 20:00–01:00</span>
-            </p>
-
-            <p>
-              <strong>Martes</strong>
-              <span>Cerrado</span>
-            </p>
-
-            <p>
-              <strong>Miércoles</strong>
-              <span>12:00–16:00 · 20:00–01:00</span>
-            </p>
-
-            <p>
-              <strong>Jueves</strong>
-              <span>12:00–16:00 · 20:00–01:00</span>
-            </p>
-
-            <p>
-              <strong>Viernes</strong>
-              <span>12:00–16:00 · 20:00–02:00</span>
-            </p>
-
-            <p>
-              <strong>Sábado</strong>
-              <span>12:00–16:00 · 20:00–02:00</span>
-            </p>
-
-            <p>
-              <strong>Domingo</strong>
-              <span>12:00–16:00 · 20:00–01:00</span>
-            </p>
-          </div>
+          <OpeningHours />
         </div>
       </div>
     </section>
@@ -445,7 +312,7 @@ import "../styles/global.css";
         <div class="hero-actions">
           <a
             class="button"
-            href="https://wa.me/34675326150"
+            href={negocio.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -459,62 +326,4 @@ import "../styles/global.css";
   </main>
 
   <Footer />
-
-  <script>
-    const lightbox = document.querySelector<HTMLDivElement>("#lightbox");
-    const lightboxImage =
-      document.querySelector<HTMLImageElement>(".lightbox-image");
-    const closeButton =
-      document.querySelector<HTMLButtonElement>(".lightbox-close");
-    const galleryItems =
-      document.querySelectorAll<HTMLButtonElement>("[data-lightbox]");
-
-    function openLightbox(src: string, alt: string) {
-      if (!lightbox || !lightboxImage) return;
-
-      lightboxImage.src = src;
-      lightboxImage.alt = alt || "Imagen de Terraza Miami";
-
-      lightbox.classList.add("is-open");
-      lightbox.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeLightbox() {
-      if (!lightbox || !lightboxImage) return;
-
-      lightbox.classList.remove("is-open");
-      lightbox.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-
-      setTimeout(() => {
-        lightboxImage.src = "";
-      }, 200);
-    }
-
-    galleryItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const src = item.getAttribute("data-lightbox");
-        const image = item.querySelector<HTMLImageElement>("img");
-
-        if (src) {
-          openLightbox(src, image?.alt || "");
-        }
-      });
-    });
-
-    closeButton?.addEventListener("click", closeLightbox);
-
-    lightbox?.addEventListener("click", (event) => {
-      if (event.target === lightbox) {
-        closeLightbox();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeLightbox();
-      }
-    });
-  </script>
 </BaseLayout>

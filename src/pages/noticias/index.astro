@@ -2,7 +2,10 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
-import "../../styles/global.css";
+import { negocio } from "../../data/negocio";
+import { fechaVisible, getNoticiasOrdenadas } from "../../utils/noticias";
+
+const noticias = await getNoticiasOrdenadas();
 ---
 
 <BaseLayout
@@ -36,43 +39,32 @@ import "../../styles/global.css";
         </div>
 
         <div class="news-grid">
-          <!-- NOTICIA HALLOWEEN -->
-          <article class="news-card">
-            <div class="news-card-content">
-              <p class="news-date">31 de octubre de 2026</p>
+          {
+            noticias.map((noticia) => (
+              <article class="news-card">
+                {noticia.data.imagen && (
+                  <img
+                    class="news-card-image"
+                    src={noticia.data.imagen.src}
+                    alt={noticia.data.imagen.alt}
+                    loading="lazy"
+                  />
+                )}
 
-              <h3>Fiesta de Halloween en Terraza Miami</h3>
+                <div class="news-card-content">
+                  <p class="news-date">{fechaVisible(noticia)}</p>
 
-              <p>
-                Este Halloween te esperamos en Terraza Miami con DJ en vivo,
-                concurso de disfraces, ambiente tematizado, chupitos y muchas
-                sorpresas.
-              </p>
+                  <h3>{noticia.data.titulo}</h3>
 
-              <a class="news-link" href="/noticias/halloween-2026">
-                Leer noticia →
-              </a>
-            </div>
-          </article>
+                  <p>{noticia.data.descripcion}</p>
 
-          <!-- NOTICIA SAN ESTEBAN -->
-          <article class="news-card">
-            <div class="news-card-content">
-              <p class="news-date">Agosto 2026</p>
-
-              <h3>Nuestro primer San Esteban en Puebla del Prior</h3>
-
-              <p>
-                Este verano hemos vivido nuestro primer San Esteban desde la
-                apertura de Terraza Miami. Descubre algunos de los momentos que
-                compartimos durante estas fiestas.
-              </p>
-
-              <a class="news-link" href="/noticias/fiestas-san-esteban-2026">
-                Leer noticia →
-              </a>
-            </div>
-          </article>
+                  <a class="news-link" href={`/noticias/${noticia.id}`}>
+                    Leer noticia →
+                  </a>
+                </div>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -90,11 +82,11 @@ import "../../styles/global.css";
         </p>
 
         <div class="hero-actions">
-          <a class="button" href="/contacto"> Contacto </a>
+          <a class="button" href="/contacto">Contacto</a>
 
           <a
             class="button button-secondary"
-            href="https://wa.me/34675326150"
+            href={negocio.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
           >

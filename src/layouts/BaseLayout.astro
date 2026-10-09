@@ -1,11 +1,14 @@
 ---
+import { Font } from "astro:assets";
+import "../styles/global.css";
+
 interface Props {
   title: string;
   description: string;
   ogImage?: string;
 }
 
-const { title, description, ogImage = "/images/logo.png" } = Astro.props;
+const { title, description, ogImage = "/images/logo.jpg" } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
@@ -48,7 +51,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 
     <!-- Favicon -->
 
-    <link rel="icon" type="image/png" href="/images/favicon.jpeg" />
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg" />
+
+    <!-- Tipografía de los títulos (Astro la descarga y la sirve desde la propia web) -->
+
+    <Font cssVariable="--font-titulos" preload />
+
+    <!-- Contenido extra que cada página quiera añadir al head -->
+
+    <slot name="head" />
   </head>
 
   <body id="top">

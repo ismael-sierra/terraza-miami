@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Página no encontrada | Terraza Miami"
+  description="La página que buscas no existe o ha cambiado de dirección."
+>
+  <Header />
+
+  <main>
+    <section class="section final-cta not-found">
+      <div class="container">
+        <p class="eyebrow">Error 404</p>
+
+        <h1>Esta mesa no existe</h1>
+
+        <p>
+          La página que buscas no existe o ha cambiado de dirección. Pero la
+          terraza sigue en su sitio.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="/">Volver al inicio</a>
+
+          <a class="button button-secondary" href="/carta">Ver la carta</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
