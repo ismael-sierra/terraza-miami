@@ -18,6 +18,8 @@ const noticias = defineCollection({
     // Imagen de la tarjeta del listado. Dentro de la noticia solo se muestra
     // si no hay galería (por ejemplo, el cartel de un evento).
     imagen: z.object({ src: z.string(), alt: z.string() }).optional(),
+    // Cartel que se muestra arriba en la noticia, aunque también haya galería.
+    cartel: z.object({ src: z.string(), alt: z.string() }).optional(),
     galeria: z.array(z.object({ src: z.string(), alt: z.string() })).optional(),
 
     // Solo para eventos: la fecha del evento y los datos de la ficha.

@@ -42,13 +42,22 @@ const noticias = await getNoticiasOrdenadas();
           {
             noticias.map((noticia) => (
               <article class="news-card">
+                {/* Enlace extra sobre la foto: se oculta a lectores de pantalla y
+                    teclado porque ya existe el enlace "Leer noticia". */}
                 {noticia.data.imagen && (
-                  <img
-                    class="news-card-image"
-                    src={noticia.data.imagen.src}
-                    alt={noticia.data.imagen.alt}
-                    loading="lazy"
-                  />
+                  <a
+                    class="news-card-image-link"
+                    href={`/noticias/${noticia.id}`}
+                    tabindex="-1"
+                    aria-hidden="true"
+                  >
+                    <img
+                      class="news-card-image"
+                      src={noticia.data.imagen.src}
+                      alt=""
+                      loading="lazy"
+                    />
+                  </a>
                 )}
 
                 <div class="news-card-content">

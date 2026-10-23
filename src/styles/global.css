@@ -958,11 +958,21 @@ address {
   border-color: var(--color-primary);
 }
 
+.news-card-image-link {
+  display: block;
+  overflow: hidden;
+}
+
 .news-card-image {
   width: 100%;
   height: 240px;
   object-fit: cover;
   border-bottom: 1px solid var(--color-border);
+  transition: transform 0.35s ease;
+}
+
+.news-card-image-link:hover .news-card-image {
+  transform: scale(1.04);
 }
 
 .news-card-content {

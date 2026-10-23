@@ -23,6 +23,11 @@ const { Content } = await render(noticia);
 const evento = data.evento;
 const fechaEvento = evento?.fecha.toISOString().slice(0, 10);
 
+// Imagen grande de arriba: el cartel si lo hay; si no, la imagen de la
+// tarjeta, salvo que la noticia ya tenga galería.
+const imagenCabecera = data.cartel ?? (data.galeria ? undefined : data.imagen);
+const imagenEvento = data.cartel ?? data.imagen;
+
 // Datos estructurados para que Google pueda mostrar el evento en los resultados.
 const eventoJsonLd = evento && {
   "@context": "https://schema.org",
@@ -32,7 +37,7 @@ const eventoJsonLd = evento && {
   startDate: fechaEvento,
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-  image: data.imagen && new URL(data.imagen.src, Astro.site).href,
+  image: imagenEvento && new URL(imagenEvento.src, Astro.site).href,
   location: {
     "@type": "Place",
     name: negocio.nombre,
@@ -92,9 +97,9 @@ const eventoJsonLd = evento && {
         }
 
         {
-          data.imagen && !data.galeria && (
+          imagenCabecera && (
             <div class="news-detail-image">
-              <img src={data.imagen.src} alt={data.imagen.alt} />
+              <img src={imagenCabecera.src} alt={imagenCabecera.alt} />
             </div>
           )
         }
