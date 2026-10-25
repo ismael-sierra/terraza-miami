@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Gallery from "../../components/Gallery.astro";
+import Lightbox from "../../components/Lightbox.astro";
 import { negocio } from "../../data/negocio";
 import { fechaVisible, getNoticiasOrdenadas } from "../../utils/noticias";
 
@@ -117,11 +118,40 @@ const eventoJsonLd = evento && {
           )
         }
 
+        {
+          evento?.programa && (
+            <section class="event-program" aria-labelledby="programa-titulo">
+              <h2 id="programa-titulo">Programa del día</h2>
+
+              <div class="event-program-grid">
+                {evento.programa.map(({ hora, titulo, texto, cartel }) => (
+                  <article class="event-program-item">
+                    <button
+                      class="event-program-poster"
+                      type="button"
+                      aria-label={`Ampliar cartel: ${cartel.alt}`}
+                      data-lightbox={cartel.src}
+                    >
+                      <img src={cartel.src} alt={cartel.alt} loading="lazy" />
+                    </button>
+
+                    <div class="event-program-text">
+                      <p class="event-program-time">{hora}</p>
+                      <h3>{titulo}</h3>
+                      <p>{texto}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
         <div class="news-detail-content">
           <Content />
 
           {
-            evento && (
+            evento?.destacados && (
               <div class="event-highlights">
                 {evento.destacados.map(({ icono, titulo, texto }) => (
                   <div>
@@ -174,6 +204,8 @@ const eventoJsonLd = evento && {
   </main>
 
   <Footer />
+
+  <Lightbox />
 </BaseLayout>
 
 <script>

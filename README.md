@@ -30,7 +30,8 @@ npm run preview   # ver la versión generada
    - `imagen` es la foto de la tarjeta del listado (las imágenes van en `public/images/`).
    - `galeria` es opcional: si la pones, se muestra al final de la noticia.
    - `cartel` es opcional: si la pones, se muestra grande arriba de la noticia, aunque haya galería.
-   - `evento` es opcional: si es un evento, añade su fecha, los detalles y los destacados.
+   - `evento` es opcional: si es un evento, añade su fecha y los detalles. Puedes añadir también
+     `destacados` (tarjetas con icono) y/o `programa` (actividades con hora y cartel).
      Cuando el evento ya ha pasado, la noticia muestra un aviso automáticamente.
 3. Debajo de la cabecera escribe el texto en Markdown (`## Título`, `**negrita**`, `[enlace](/carta)`).
 
