@@ -30,7 +30,7 @@ export const negocio = {
 
   valoracion: {
     nota: "4,3",
-    opiniones: 18,
+    opiniones: 19,
   },
 
   redes: {

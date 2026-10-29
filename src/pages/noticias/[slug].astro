@@ -25,8 +25,9 @@ const evento = data.evento;
 const fechaEvento = evento?.fecha.toISOString().slice(0, 10);
 
 // Imagen grande de arriba: el cartel si lo hay; si no, la imagen de la
-// tarjeta, salvo que la noticia ya tenga galería.
-const imagenCabecera = data.cartel ?? (data.galeria ? undefined : data.imagen);
+// tarjeta, salvo que la noticia ya muestre sus imágenes en galería o programa.
+const imagenCabecera =
+  data.cartel ?? (data.galeria || evento?.programa ? undefined : data.imagen);
 const imagenEvento = data.cartel ?? data.imagen;
 
 // Datos estructurados para que Google pueda mostrar el evento en los resultados.

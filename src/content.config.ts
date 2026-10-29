@@ -18,7 +18,7 @@ const noticias = defineCollection({
     // Fecha de publicación: ordena las noticias (la más reciente primero).
     fecha: z.coerce.date(),
     // Imagen de la tarjeta del listado. Dentro de la noticia solo se muestra
-    // si no hay galería (por ejemplo, el cartel de un evento).
+    // si no hay galería ni programa (por ejemplo, el cartel de un evento).
     imagen: imagen.optional(),
     // Cartel que se muestra arriba en la noticia, aunque también haya galería.
     cartel: imagen.optional(),
