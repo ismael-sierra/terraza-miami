@@ -2,6 +2,10 @@
 // Visor de imágenes a pantalla completa. Abre cualquier elemento de la página
 // con el atributo data-lightbox="<ruta de la imagen>". Se incluye una sola vez
 // por página.
+//
+// Si el elemento está dentro de un contenedor con data-lightbox-grupo, se puede
+// pasar de una imagen a otra del grupo con las flechas, el teclado o deslizando
+// el dedo. Las imágenes ocultas por un filtro (atributo hidden) se saltan.
 ---
 
 <div
@@ -15,7 +19,27 @@
     ×
   </button>
 
+  <button
+    class="lightbox-nav lightbox-prev"
+    type="button"
+    aria-label="Imagen anterior"
+    hidden
+  >
+    ‹
+  </button>
+
   <img class="lightbox-image" src="" alt="" />
+
+  <button
+    class="lightbox-nav lightbox-next"
+    type="button"
+    aria-label="Imagen siguiente"
+    hidden
+  >
+    ›
+  </button>
+
+  <p class="lightbox-counter" aria-live="polite" hidden></p>
 </div>
 
 <script>
@@ -24,20 +48,47 @@
     document.querySelector<HTMLImageElement>(".lightbox-image");
   const closeButton =
     document.querySelector<HTMLButtonElement>(".lightbox-close");
+  const prevButton = document.querySelector<HTMLButtonElement>(".lightbox-prev");
+  const nextButton = document.querySelector<HTMLButtonElement>(".lightbox-next");
+  const counter = document.querySelector<HTMLParagraphElement>(".lightbox-counter");
 
   // Botón que abrió la imagen, para devolverle el foco al cerrar.
   let lastTrigger: HTMLElement | null = null;
+  // Imágenes entre las que se puede navegar y posición de la actual.
+  let items: HTMLElement[] = [];
+  let current = 0;
 
   function isOpen() {
     return lightbox?.classList.contains("is-open") ?? false;
   }
 
-  function openLightbox(trigger: HTMLButtonElement) {
-    const src = trigger.dataset.lightbox;
-    if (!lightbox || !lightboxImage || !closeButton || !src) return;
+  function show(index: number) {
+    if (!lightboxImage || !counter) return;
 
-    lightboxImage.src = src;
-    lightboxImage.alt = trigger.querySelector("img")?.alt ?? "";
+    current = (index + items.length) % items.length;
+    const item = items[current];
+
+    lightboxImage.src = item.dataset.lightbox ?? "";
+    lightboxImage.alt = item.querySelector("img")?.alt ?? "";
+    counter.textContent = `${current + 1} / ${items.length}`;
+  }
+
+  function openLightbox(trigger: HTMLElement) {
+    if (!lightbox || !closeButton || !prevButton || !nextButton || !counter) {
+      return;
+    }
+
+    const grupo = trigger.closest("[data-lightbox-grupo]");
+    items = grupo
+      ? [...grupo.querySelectorAll<HTMLElement>("[data-lightbox]:not([hidden])")]
+      : [trigger];
+
+    const conNavegacion = items.length > 1;
+    prevButton.hidden = !conNavegacion;
+    nextButton.hidden = !conNavegacion;
+    counter.hidden = !conNavegacion;
+
+    show(items.indexOf(trigger));
 
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
@@ -62,27 +113,51 @@
     }, 200);
   }
 
-  document
-    .querySelectorAll<HTMLButtonElement>("[data-lightbox]")
-    .forEach((item) => {
-      item.addEventListener("click", () => openLightbox(item));
-    });
+  document.querySelectorAll<HTMLElement>("[data-lightbox]").forEach((item) => {
+    item.addEventListener("click", () => openLightbox(item));
+  });
 
   closeButton?.addEventListener("click", closeLightbox);
+  prevButton?.addEventListener("click", () => show(current - 1));
+  nextButton?.addEventListener("click", () => show(current + 1));
 
   lightbox?.addEventListener("click", (event) => {
     if (event.target === lightbox) closeLightbox();
+  });
+
+  // Deslizar el dedo a izquierda o derecha en el móvil.
+  let touchStartX = 0;
+
+  lightbox?.addEventListener(
+    "touchstart",
+    (event) => (touchStartX = event.touches[0].clientX),
+    { passive: true },
+  );
+
+  lightbox?.addEventListener("touchend", (event) => {
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    if (items.length > 1 && Math.abs(distance) > 50) {
+      show(current + (distance < 0 ? 1 : -1));
+    }
   });
 
   document.addEventListener("keydown", (event) => {
     if (!isOpen()) return;
 
     if (event.key === "Escape") closeLightbox();
+    if (items.length > 1 && event.key === "ArrowLeft") show(current - 1);
+    if (items.length > 1 && event.key === "ArrowRight") show(current + 1);
 
-    // El único elemento enfocable es el botón de cerrar: el foco no sale del diálogo.
-    if (event.key === "Tab") {
+    // El foco no sale del diálogo: recorre solo sus botones visibles.
+    if (event.key === "Tab" && lightbox) {
+      const buttons = [
+        ...lightbox.querySelectorAll<HTMLButtonElement>("button:not([hidden])"),
+      ];
+      const position = buttons.indexOf(document.activeElement as HTMLButtonElement);
+      const step = event.shiftKey ? -1 : 1;
+
       event.preventDefault();
-      closeButton?.focus();
+      buttons[(position + step + buttons.length) % buttons.length]?.focus();
     }
   });
 </script>

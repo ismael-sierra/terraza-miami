@@ -124,7 +124,7 @@ const eventoJsonLd = evento && {
             <section class="event-program" aria-labelledby="programa-titulo">
               <h2 id="programa-titulo">Programa del día</h2>
 
-              <div class="event-program-grid">
+              <div class="event-program-grid" data-lightbox-grupo>
                 {evento.programa.map(({ hora, titulo, texto, cartel }) => (
                   <article class="event-program-item">
                     <button

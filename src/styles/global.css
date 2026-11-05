@@ -361,6 +361,70 @@ h3,
   outline-offset: 3px;
 }
 
+/* Fotos que aún no se muestran (antes de pulsar "Ver más fotos"). */
+.gallery-item.is-collapsed,
+.gallery-item[hidden] {
+  display: none;
+}
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-filter {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.gallery-filter span {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.gallery-filter:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.gallery-filter[aria-pressed="true"] {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #111;
+}
+
+.gallery-filter:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.gallery-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.gallery-more button {
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gallery-more button[hidden] {
+  display: none;
+}
+
 /* =========================================================
    LIGHTBOX
    ========================================================= */
@@ -368,7 +432,8 @@ h3,
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  /* Por encima del botón de volver arriba. */
+  z-index: 1100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -434,6 +499,59 @@ h3,
 .lightbox-close:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  padding: 0 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background 0.2s ease;
+}
+
+.lightbox-nav[hidden] {
+  display: none;
+}
+
+.lightbox-prev {
+  left: 1.25rem;
+}
+
+.lightbox-next {
+  right: 1.25rem;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.lightbox-nav:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  margin: 0;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  transform: translateX(-50%);
 }
 
 /* =========================================================
@@ -1440,11 +1558,12 @@ address {
 
   /* Galería */
   .gallery {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
   .gallery-item {
-    height: 300px;
+    height: 240px;
   }
 
   .news-detail h1 {
@@ -1571,7 +1690,27 @@ address {
 
   /* Galería */
   .gallery-item {
-    height: 250px;
+    height: 170px;
+  }
+
+  .gallery-item::after {
+    display: none;
+  }
+
+  .lightbox-nav {
+    top: auto;
+    bottom: 0.6rem;
+    width: 44px;
+    height: 44px;
+    transform: none;
+  }
+
+  .lightbox-prev {
+    left: 1rem;
+  }
+
+  .lightbox-next {
+    right: 1rem;
   }
 
   /* Lightbox */

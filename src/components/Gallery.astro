@@ -1,23 +1,119 @@
 ---
 interface Props {
-  imagenes: { src: string; alt: string }[];
+  imagenes: { src: string; alt: string; grupo?: string }[];
+  // Fotos que se ven al principio; el resto aparece con "Ver más fotos".
+  porPagina?: number;
 }
 
-const { imagenes } = Astro.props;
+const { imagenes, porPagina = 9 } = Astro.props;
+
+// Si alguna foto tiene grupo, se muestran botones para filtrar por grupo.
+const grupos = [
+  ...new Set(imagenes.flatMap(({ grupo }) => (grupo ? [grupo] : []))),
+];
+const paginada = imagenes.length > porPagina;
 ---
 
-<div class="gallery">
+<div class="gallery-wrapper" data-por-pagina={porPagina}>
   {
-    imagenes.map(({ src, alt }) => (
-      <button
-        class="gallery-item"
-        type="button"
-        aria-label={`Ampliar imagen: ${alt}`}
-        data-lightbox={src}
-      >
-        <img src={src} alt={alt} loading="lazy" />
-      </button>
-    ))
+    grupos.length > 0 && (
+      <div class="gallery-filters" role="group" aria-label="Filtrar fotos">
+        <button
+          class="gallery-filter"
+          type="button"
+          data-filtro=""
+          aria-pressed="true"
+        >
+          Todas <span>({imagenes.length})</span>
+        </button>
+
+        {grupos.map((grupo) => (
+          <button
+            class="gallery-filter"
+            type="button"
+            data-filtro={grupo}
+            aria-pressed="false"
+          >
+            {grupo}{" "}
+            <span>({imagenes.filter((imagen) => imagen.grupo === grupo).length})</span>
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  <div class="gallery" data-lightbox-grupo>
+    {
+      imagenes.map(({ src, alt, grupo }, i) => (
+        <button
+          class:list={["gallery-item", { "is-collapsed": i >= porPagina }]}
+          type="button"
+          aria-label={`Ampliar imagen: ${alt}`}
+          data-lightbox={src}
+          data-grupo={grupo}
+        >
+          <img src={src} alt={alt} loading="lazy" />
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    paginada && (
+      <div class="gallery-more">
+        <button class="button button-secondary" type="button">
+          Ver más fotos
+        </button>
+      </div>
+    )
   }
 </div>
 
+<script>
+  document.querySelectorAll<HTMLElement>(".gallery-wrapper").forEach((wrapper) => {
+    const porPagina = Number(wrapper.dataset.porPagina);
+    const items = [...wrapper.querySelectorAll<HTMLElement>(".gallery-item")];
+    const filtros = [...wrapper.querySelectorAll<HTMLButtonElement>(".gallery-filter")];
+    const moreButton = wrapper.querySelector<HTMLButtonElement>(".gallery-more button");
+
+    let filtro = "";
+    let visibles = porPagina;
+
+    // hidden: no pertenece al filtro elegido (el visor también lo salta).
+    // is-collapsed: pertenece, pero aún no se ha pulsado "Ver más fotos".
+    function render() {
+      const delFiltro = items.filter((item) => !filtro || item.dataset.grupo === filtro);
+
+      items.forEach((item) => {
+        const posicion = delFiltro.indexOf(item);
+        item.hidden = posicion === -1;
+        item.classList.toggle("is-collapsed", posicion >= visibles);
+      });
+
+      if (moreButton) {
+        const restantes = delFiltro.length - visibles;
+        moreButton.hidden = restantes <= 0;
+        moreButton.textContent = `Ver más fotos (${restantes})`;
+      }
+    }
+
+    filtros.forEach((boton) => {
+      boton.addEventListener("click", () => {
+        filtro = boton.dataset.filtro ?? "";
+        visibles = porPagina;
+        filtros.forEach((b) => b.setAttribute("aria-pressed", String(b === boton)));
+        render();
+      });
+    });
+
+    moreButton?.addEventListener("click", () => {
+      // El foco pasa a la primera foto nueva para seguir navegando desde ahí.
+      const primeraNueva = items.filter((item) => !item.hidden)[visibles];
+      visibles += porPagina;
+      render();
+      primeraNueva?.focus();
+    });
+
+    render();
+  });
+</script>

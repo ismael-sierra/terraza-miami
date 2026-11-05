@@ -22,7 +22,8 @@ const noticias = defineCollection({
     imagen: imagen.optional(),
     // Cartel que se muestra arriba en la noticia, aunque también haya galería.
     cartel: imagen.optional(),
-    galeria: z.array(imagen).optional(),
+    // Con "grupo" en las fotos, la galería muestra botones para filtrarlas.
+    galeria: z.array(imagen.extend({ grupo: z.string().optional() })).optional(),
 
     // Solo para eventos: la fecha del evento y los datos de la ficha.
     evento: z

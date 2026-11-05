@@ -28,7 +28,8 @@ npm run preview   # ver la versión generada
 2. Copia la cabecera (lo que va entre `---`) de una noticia existente y rellena los datos.
    - `fecha` es la de publicación y sirve para ordenar el listado.
    - `imagen` es la foto de la tarjeta del listado (las imágenes van en `public/images/`).
-   - `galeria` es opcional: si la pones, se muestra al final de la noticia.
+   - `galeria` es opcional: si la pones, se muestra al final de la noticia. Si tiene más de 9 fotos,
+     aparece el botón "Ver más fotos"; y si añades `grupo:` a cada foto, salen botones para filtrarlas.
    - `cartel` es opcional: si la pones, se muestra grande arriba de la noticia, aunque haya galería.
    - `evento` es opcional: si es un evento, añade su fecha y los detalles. Puedes añadir también
      `destacados` (tarjetas con icono) y/o `programa` (actividades con hora y cartel).
